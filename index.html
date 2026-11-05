@@ -8,16 +8,17 @@
   <style>
     :root {
       color-scheme: light;
-      --ink: #203b38;
-      --muted: #64736d;
-      --paper: #fffaf0;
+      --ink: #163d3e;
+      --muted: #496a6e;
+      --paper: #f4fff9;
+      --paper-strong: #def6ef;
       --white: #ffffff;
-      --green: #2f7867;
-      --green-dark: #205849;
-      --coral: #e76d57;
-      --yellow: #f5c64c;
-      --line: #e9e3d6;
-      --shadow: 0 8px 24px rgb(52 64 48 / 8%);
+      --green: #1f9a78;
+      --green-dark: #196b5a;
+      --coral: #ff7a5c;
+      --yellow: #f9d65d;
+      --line: #dfeedd;
+      --shadow: 0 10px 26px rgb(17 82 72 / 12%);
       font-family: "Trebuchet MS", "Arial Rounded MT Bold", sans-serif;
     }
 
@@ -27,9 +28,10 @@
       min-width: 320px;
       margin: 0;
       color: var(--ink);
-      background-color: var(--paper);
-      background-image: radial-gradient(#eadfc9 0.75px, transparent 0.75px);
-      background-size: 19px 19px;
+      background:
+        radial-gradient(circle at top, #fff6d9 0%, rgba(255,246,217,0) 28%),
+        linear-gradient(180deg, #dffaf5 0%, #c6f5e3 34%, #bfe7d5 56%, #f3f9e8 100%);
+      background-attachment: fixed;
     }
 
     button { font: inherit; }
@@ -139,7 +141,7 @@
       padding: 21px 24px;
       border: 2px solid var(--ink);
       border-radius: 16px;
-      background: #dff1e5;
+      background: linear-gradient(135deg, #dff9ef 0%, #ffd7b5 100%);
       box-shadow: 4px 5px 0 var(--ink);
     }
 
@@ -356,7 +358,7 @@
       border: 2px solid var(--ink);
       border-radius: 16px;
       color: var(--ink);
-      background: var(--paper);
+      background: linear-gradient(180deg, #f7fff8 0%, #e5f9f0 100%);
       box-shadow: 0 20px 70px rgb(20 30 25 / 28%);
     }
 
@@ -457,7 +459,7 @@
       </div>
       <div class="filters" role="group" aria-label="Filter pets by type">
         <button class="filter-button" type="button" data-filter="all" aria-pressed="true">Everyone</button>
-        <button class="filter-button" type="button" data-filter="dog" aria-pressed="false">Dogs</button>
+        <button class="filter-button" type="button" data-filter="exotic" aria-pressed="false">Exotic animals</button>
         <button class="filter-button" type="button" data-filter="cat" aria-pressed="false">Cats</button>
       </div>
       <div class="pet-grid" id="pet-grid" aria-live="polite"></div>
@@ -489,9 +491,9 @@
     "use strict";
 
     const pets = [
-      { id: "biscuit", name: "Biscuit", type: "dog", breed: "Corgi", age: "3 years", personality: "Sunny, loyal, and a little bit wiggly", activity: "Chasing bubbles in the garden", emoji: "🐶", color: "bg-peach" },
-      { id: "milo", name: "Milo", type: "dog", breed: "Beagle", age: "5 years", personality: "Curious, gentle, and an excellent listener", activity: "Sniffing out hidden treats", emoji: "🐕", color: "bg-blue" },
-      { id: "pepper", name: "Pepper", type: "dog", breed: "Dalmatian", age: "2 years", personality: "Playful, brave, and full of bounce", activity: "A game of fetch at the park", emoji: "🐩", color: "bg-lilac" },
+      { id: "kiwi", name: "Kiwi", type: "exotic", breed: "Axolotl", age: "3 years", personality: "Calm, curious, and delightfully splashy", activity: "Gliding through cool water gardens", emoji: "🦎", color: "bg-peach" },
+      { id: "mango", name: "Mango", type: "exotic", breed: "Fennec Fox", age: "5 years", personality: "Bright-eyed, playful, and endlessly sweet", activity: "Dashing across desert dunes", emoji: "🦊", color: "bg-blue" },
+      { id: "opal", name: "Opal", type: "exotic", breed: "Toucan", age: "2 years", personality: "Charming, bold, and always singing", activity: "Perching high in a jungle canopy", emoji: "🦜", color: "bg-lilac" },
       { id: "pudding", name: "Pudding", type: "cat", breed: "Calico", age: "4 years", personality: "Sweet, clever, and quietly adventurous", activity: "Watching birds from a sunny window", emoji: "🐈", color: "bg-yellow" },
       { id: "tofu", name: "Tofu", type: "cat", breed: "Maine Coon", age: "6 years", personality: "Fluffy, thoughtful, and wonderfully patient", activity: "Napping in a warm laundry basket", emoji: "🐈‍⬛", color: "bg-mint" },
       { id: "sprout", name: "Sprout", type: "cat", breed: "Tabby", age: "1 year", personality: "Bouncy, chatty, and always up for a game", activity: "Pouncing on a feather toy", emoji: "😺", color: "bg-pink" }
@@ -574,7 +576,7 @@
       selectedPetId = pet.id;
       document.getElementById("dialog-portrait").className = `pet-portrait dialog-portrait ${pet.color}`;
       document.getElementById("dialog-portrait").textContent = pet.emoji;
-      document.getElementById("dialog-type").textContent = `A lovely ${pet.type}`;
+      document.getElementById("dialog-type").textContent = pet.type === "cat" ? "A lovely cat" : "A lovely exotic animal";
       document.getElementById("dialog-name").textContent = pet.name;
       document.getElementById("dialog-breed").textContent = pet.breed;
       document.getElementById("dialog-age").textContent = pet.age;
